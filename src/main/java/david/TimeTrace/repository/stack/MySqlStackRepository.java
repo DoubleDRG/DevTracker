@@ -4,12 +4,10 @@ import david.TimeTrace.domain.Stack;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
-@Transactional
 @RequiredArgsConstructor
 @Repository
 public class MySqlStackRepository implements StackRepository
