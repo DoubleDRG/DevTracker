@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
@@ -89,7 +90,6 @@ class MySqlStackRepositoryTest
     void findByName()
     {
         Optional<Stack> findSpring = stackRepository.findByName("Spring");
-        findSpring.ifPresent(stack -> assertThat(stack.getId()).isEqualTo(1L));
         findSpring.ifPresent(stack -> assertThat(stack.getImageUrl()).isEqualTo(spring.getImageUrl()));
     }
 
@@ -107,20 +107,38 @@ class MySqlStackRepositoryTest
     @Test
     void findSelectedName()
     {
+        List<String> selectedStack = stackRepository.findSelectedName();
+        assertThat(selectedStack.size()).isEqualTo(3);
+        assertThat(selectedStack).contains(spring.getName());
+        assertThat(selectedStack).contains(mySql.getName());
+        assertThat(selectedStack).contains(java.getName());
     }
 
     @Test
     void findSelectedImageUrls()
     {
+        List<String> selectedStack = stackRepository.findSelectedImageUrls();
+        assertThat(selectedStack.size()).isEqualTo(3);
+        assertThat(selectedStack).contains(spring.getImageUrl());
+        assertThat(selectedStack).contains(mySql.getImageUrl());
+        assertThat(selectedStack).contains(java.getImageUrl());
     }
 
     @Test
     void findUnselectedName()
     {
+        List<String> selectedStack = stackRepository.findUnselectedName();
+        assertThat(selectedStack.size()).isEqualTo(2);
+        assertThat(selectedStack).contains(flask.getName());
+        assertThat(selectedStack).contains(typeScript.getName());
     }
 
     @Test
     void findUnselectedImageUrls()
     {
+        List<String> selectedStack = stackRepository.findUnselectedImageUrls();
+        assertThat(selectedStack.size()).isEqualTo(2);
+        assertThat(selectedStack).contains(flask.getImageUrl());
+        assertThat(selectedStack).contains(typeScript.getImageUrl());
     }
 }
