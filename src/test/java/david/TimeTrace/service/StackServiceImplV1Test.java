@@ -1,6 +1,7 @@
-package david.TimeTrace.repository;
+package david.TimeTrace.service;
 
 import david.TimeTrace.domain.Stack;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,15 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-class MySqlStackRepositoryTest
+class StackServiceImplV1Test
 {
     @Autowired
-    private StackRepository stackRepository;
+    private StackService stackService;
 
     private Stack spring;
     private Stack mySql;
@@ -63,80 +63,52 @@ class MySqlStackRepositoryTest
                 .selected(false)
                 .build();
 
-        stackRepository.save(spring);
-        stackRepository.save(mySql);
-        stackRepository.save(java);
-        stackRepository.save(typeScript);
-        stackRepository.save(flask);
+        stackService.register(spring);
+        stackService.register(mySql);
+        stackService.register(java);
+        stackService.register(typeScript);
+        stackService.register(flask);
     }
 
     @AfterEach
     void cleanUp()
     {
-        stackRepository.clearAll();
+        stackService.clearAll();
     }
 
     @Test
-    void save()
+    void registerStack()
     {
-        assertThat(spring.getName()).isEqualTo("Spring");
-        assertThat(stackRepository.findAll().size()).isEqualTo(5);
-        assertThat(stackRepository.findAll().get(3).getName()).isEqualTo(typeScript.getName());
+        List<String> list = stackService.findSelectedStackNames();
+        assertThat(list.size()).isEqualTo(3);
     }
 
     @Test
-    void findByName()
+    void findSelectedStackNames()
     {
-        Optional<Stack> findSpring = stackRepository.findByName("Spring");
-        findSpring.ifPresent(stack -> assertThat(stack.getImageUrl()).isEqualTo(spring.getImageUrl()));
+        List<String> list = stackService.findSelectedStackNames();
+        assertThat(list.size()).isEqualTo(3);
+        assertThat(list).contains(spring.getName());
+        assertThat(list).contains(mySql.getName());
+        assertThat(list).contains(java.getName());
     }
 
     @Test
-    void findImageUrlByName()
+    void findSelectedStackUrls()
     {
-        Optional<String> findSpringUrl = stackRepository.findImageUrlByName("Spring");
-        findSpringUrl.ifPresent(url -> assertThat(url).isEqualTo(spring.getImageUrl()));
-        findSpringUrl.ifPresent(url -> assertThat(url).isNotEqualTo(flask.getImageUrl()));
-
-        Optional<String> xxxStackUrl = stackRepository.findImageUrlByName("xxxStack");
-        assertThat(xxxStackUrl).isEmpty();
+        List<String> list = stackService.findSelectedStackUrls();
+        assertThat(list.size()).isEqualTo(3);
+        assertThat(list).contains(spring.getImageUrl());
+        assertThat(list).contains(mySql.getImageUrl());
+        assertThat(list).contains(java.getImageUrl());
     }
 
     @Test
-    void findSelectedName()
+    void findUnselectedStackNames()
     {
-        List<String> selectedStack = stackRepository.findSelectedNames();
-        assertThat(selectedStack.size()).isEqualTo(3);
-        assertThat(selectedStack).contains(spring.getName());
-        assertThat(selectedStack).contains(mySql.getName());
-        assertThat(selectedStack).contains(java.getName());
-    }
-
-    @Test
-    void findSelectedImageUrls()
-    {
-        List<String> selectedStack = stackRepository.findSelectedImageUrls();
-        assertThat(selectedStack.size()).isEqualTo(3);
-        assertThat(selectedStack).contains(spring.getImageUrl());
-        assertThat(selectedStack).contains(mySql.getImageUrl());
-        assertThat(selectedStack).contains(java.getImageUrl());
-    }
-
-    @Test
-    void findUnselectedName()
-    {
-        List<String> selectedStack = stackRepository.findUnselectedNames();
-        assertThat(selectedStack.size()).isEqualTo(2);
-        assertThat(selectedStack).contains(flask.getName());
-        assertThat(selectedStack).contains(typeScript.getName());
-    }
-
-    @Test
-    void findUnselectedImageUrls()
-    {
-        List<String> selectedStack = stackRepository.findUnselectedImageUrls();
-        assertThat(selectedStack.size()).isEqualTo(2);
-        assertThat(selectedStack).contains(flask.getImageUrl());
-        assertThat(selectedStack).contains(typeScript.getImageUrl());
+        List<String> list = stackService.findUnselectedStackNames();
+        assertThat(list.size()).isEqualTo(2);
+        assertThat(list).contains(flask.getName());
+        assertThat(list).contains(typeScript.getName());
     }
 }

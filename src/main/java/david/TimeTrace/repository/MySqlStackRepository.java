@@ -58,7 +58,7 @@ public class MySqlStackRepository implements StackRepository
     }
 
     @Override
-    public List<String> findSelectedName()
+    public List<String> findSelectedNames()
     {
         String query = "select s.name from Stack s where s.selected =:value";
         return entityManager.createQuery(query, String.class)
@@ -76,7 +76,7 @@ public class MySqlStackRepository implements StackRepository
     }
 
     @Override
-    public List<String> findUnselectedName()
+    public List<String> findUnselectedNames()
     {
         String query = "select s.name from Stack s where s.selected =:value";
         return entityManager.createQuery(query, String.class)

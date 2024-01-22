@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface StackRepository
 {
-    //==새로운 기술스택 저장==//
+    //==새로운 기술스택 저장==// 편의를 위해 씀O
     public Stack save(Stack techStack);
 
     //==모든 스택 조회==//
@@ -19,14 +19,14 @@ public interface StackRepository
     //==스택이름으로 스택이미지 Url 반환==//
     public Optional<String> findImageUrlByName(String stackName);
 
-    //==선택한 기술스택 이름 보여주기==//
-    public List<String> findSelectedName();
+    //==선택한 기술스택 이름 보여주기==// 씀O
+    public List<String> findSelectedNames();
 
-    //==선택한 기술스택 이미지 Url 보여주기==//
+    //==선택한 기술스택 이미지 Url 보여주기==// 씀O
     public List<String> findSelectedImageUrls();
 
-    //==선택하지 않은 기술스택 이름 보여주기==//
-    public List<String> findUnselectedName();
+    //==선택하지 않은 기술스택 이름 보여주기==// 씀O
+    public List<String> findUnselectedNames();
 
     //==선택하지 않은 기술스택 이미지 Url 보여주기==//
     public List<String> findUnselectedImageUrls();
