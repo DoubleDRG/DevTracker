@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Time Tracker</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['timeline']});
+        google.charts.setOnLoadCallback(drawAllTimelines);
+
+        function drawStudyTimeline(containerId, studyTimes) {
+            var container = document.getElementById(containerId);
+            var chart = new google.visualization.Timeline(container);
+            var dataTable = new google.visualization.DataTable();
+
+            dataTable.addColumn({ type: 'string', id: 'Day' });
+            dataTable.addColumn({ type: 'string', id: 'Activity' });
+            dataTable.addColumn({ type: 'date', id: 'Start' });
+            dataTable.addColumn({ type: 'date', id: 'End' });
+
+            // 시간 범위 설정
+            dataTable.addRows([
+                ['Activity', '', new Date(0,0,0,0,0,0), new Date(0,0,0,0,0,0)],  // 시작 지점 (0시)
+                ['Activity', '', new Date(0,0,1,6,0,0), new Date(0,0,1,6,0,0)], // 끝 지점 (다음날 6시)
+            ]);
+
+            // 공부 시간 데이터 추가
+            dataTable.addRows(studyTimes);
+
+            var options = {
+                timeline: { colorByRowLabel: true },
+                avoidOverlappingGridLines: false
+            };
+
+            chart.draw(dataTable, options);
+        }
+
+        function drawAllTimelines() {
+            drawStudyTimeline('timeline1', [
+                ['Activity', 'Study', new Date(0,0,0,9,0,0), new Date(0,0,0,12,30,0)],
+                ['Activity', 'Study', new Date(0,0,0,14,0,0), new Date(0,0,0,18,0,0)],
+                // 추가 데이터...
+            ]);
+
+            drawStudyTimeline('timeline2', [
+                // 다른 타임라인에 대한 데이터...
+            ]);
+
+            // 더 많은 타임라인을 그릴 수 있습니다.
+        }
+    </script>
+</head>
+<body>
+<div id="timeline1" style="height: 180px;"></div>
+<div id="timeline2" style="height: 180px;"></div>
+</body>
+</html>

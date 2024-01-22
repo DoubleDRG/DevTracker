@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row text-center mt-4 mb-4">
+        <h1>마이 페이지</h1>
+    </div>
+
+    <hr style="height: 2px; color: black; background-color: black;">
+
+    <div><h2 class="text-start pl-4 mt-4"></h2></div>
+    <div class="container">
+        <div class="row text-left">
+            <div class="col mt-3 text-left">
+                <img src="https://camo.githubusercontent.com/b908952ccc693aefea57c4f782dc41100366de07dee108f01cde69fd3c1e1bc1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f737072696e672d3644423333463f7374796c653d666f722d7468652d6261646765266c6f676f3d737072696e67266c6f676f436f6c6f723d7768697465"
+                     alt="Spring Logo">
+            </div>
+            <div class="col mt-3 text-left">
+                <img src="https://camo.githubusercontent.com/4f51c7d1330d872d48ee0952d9000aab6466d1ca3cd58378f57bdbea4e41cda1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f666c61736b2d3030303030303f7374796c653d666f722d7468652d6261646765266c6f676f3d666c61736b266c6f676f436f6c6f723d7768697465"
+                     alt="Flask Logo">
+            </div>
+            <div class="col mt-3 text-left">
+                <img src="https://camo.githubusercontent.com/d61eb16e74c265915596a84a51d5b50229367ad16915ca42da51f1a021bb3750/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d7973716c2d3434373941313f7374796c653d666f722d7468652d6261646765266c6f676f3d6d7973716c266c6f676f436f6c6f723d7768697465"
+                     alt="MySQL Logo">
+            </div>
+            <div class="col mt-3 text-left">
+                <img src="https://camo.githubusercontent.com/02f7bdf7a033321ebcb65275c6d73b5750c178c8ab3bf2c8fecec81e847be484/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f616d617a6f6e6177732d3233324633453f7374796c653d666f722d7468652d6261646765266c6f676f3d616d617a6f6e617773266c6f676f436f6c6f723d7768697465"
+                     alt="AWS Logo">
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr style="height: 2px; color: black; background-color: black;">
+    <br>
+    <form action="./stackForm.html" method="post">
+        <label class="fw-bold" for="addStack">새로운 스택 등록:</label>
+        <select class = "form-select" name="addStack" id="addStack" multiple>
+            <option value="item1">Spring</option>
+            <option value="item2">Java</option>
+            <option value="item3">Spring JPA</option>
+            <option value="item4">Thymeleaf</option>
+            <option value="item5">MySQL</option>
+            <!-- 추가 옵션들 -->
+        </select>
+        <br>
+        <label class="fw-bold" for="removeStack">기존 스택 삭제:</label>
+        <select class = "form-select" name="addStack" id="removeStack" multiple>
+            <option value="item1">Spring</option>
+            <option value="item2">Flask</option>
+            <option value="item3">MySQL</option>
+            <option value="item4">AWS</option>
+            <!-- 추가 옵션들 -->
+        </select>
+        <br>
+        <button class="btn btn-primary" type="submit">저장하기</button>
+        <button class="btn btn-secondary" type="submit">돌아가기</button>
+    </form>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

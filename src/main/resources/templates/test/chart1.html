@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Study Time Tracker</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages': ['timeline']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var container = document.getElementById('timeline');
+            var chart = new google.visualization.Timeline(container);
+            var dataTable = new google.visualization.DataTable();
+
+            dataTable.addColumn({type: 'string', id: 'Day'});
+            dataTable.addColumn({type: 'string', id: 'Activity'});
+            dataTable.addColumn({type: 'date', id: 'Start'});
+            dataTable.addColumn({type: 'date', id: 'End'});
+
+            dataTable.addRows([
+                // 가시적이지 않은 데이터 포인트로 시간 범위 설정
+                ['Activity', '', new Date(0, 0, 0, 0, 0, 0), new Date(0, 0, 0, 0, 0, 0)],  // 시작 지점 (0시)
+                ['Activity', '', new Date(0, 0, 1, 6, 0, 0), new Date(0, 0, 1, 6, 0, 0)], // 끝 지점 (다음날 6시)
+
+                // 공부 시간 데이터
+                ['Activity', 'Study', new Date(0, 0, 0, 9, 0, 0), new Date(0, 0, 0, 12, 30, 0)],
+                ['Activity', 'Study', new Date(0, 0, 0, 14, 0, 0), new Date(0, 0, 0, 18, 0, 0)],
+                // 추가 데이터...
+            ]);
+
+            var options = {
+                timeline: {colorByRowLabel: true},
+                avoidOverlappingGridLines: false
+            };
+
+            chart.draw(dataTable, options);
+        }
+    </script>
+</head>
+<body>
+<div id="timeline" style="height: 180px;"></div>
+</body>
+</html>
