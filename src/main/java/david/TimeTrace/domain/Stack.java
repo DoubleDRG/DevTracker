@@ -15,6 +15,8 @@ public class Stack
     private Long id;
 
     private String name;
+
+    @Column(length = 1000)
     private String imageUrl;
     private Boolean selected;
 
