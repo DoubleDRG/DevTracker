@@ -1,35 +1,33 @@
-package david.TimeTrace.service;
+package david.TimeTrace.controller;
 
 import david.TimeTrace.domain.Stack;
-import david.TimeTrace.repository.MySqlStackRepository;
-import org.aspectj.lang.annotation.RequiredTypes;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import david.TimeTrace.service.StackService;
+import jakarta.annotation.Nullable;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
+import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-
-@SpringBootTest
-class StackServiceImplV1Test
+@Slf4j
+@RequiredArgsConstructor
+@Controller
+public class StackController
 {
-    @Autowired
-    private StackService stackService;
+    private final StackService stackService;
 
-    private Stack spring;
-    private Stack mySql;
-    private Stack java;
-    private Stack typeScript;
-    private Stack flask;
-
-    @BeforeEach
+    @PostConstruct
     void init()
     {
-        stackService.clearAll();
+        Stack spring, mySql, java, typeScript, flask;
 
         String springUrl = "https://camo.githubusercontent.com/b908952ccc693aefea57c4f782dc41100366de07dee108f01cde69fd3c1e1bc1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f737072696e672d3644423333463f7374796c653d666f722d7468652d6261646765266c6f676f3d737072696e67266c6f676f436f6c6f723d7768697465";
         String mySqlUrl = "https://camo.githubusercontent.com/d61eb16e74c265915596a84a51d5b50229367ad16915ca42da51f1a021bb3750/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d7973716c2d3434373941313f7374796c653d666f722d7468652d6261646765266c6f676f3d6d7973716c266c6f676f436f6c6f723d7768697465";
@@ -74,39 +72,29 @@ class StackServiceImplV1Test
         stackService.register(flask);
     }
 
-    @Test
-    void registerStack()
+    //==스택관리 창 보여주기==//
+    @GetMapping("/stackManagement")
+    public String StackManageForm(Model model)
     {
-        List<String> list = stackService.findSelectedStackNames();
-        assertThat(list.size()).isEqualTo(3);
+        List<String> myStackImages = stackService.findSelectedStackUrls();
+        List<String> notMyStack = stackService.findUnselectedStackNames();
+        List<String> myStack = stackService.findSelectedStackNames();
+        
+        model.addAttribute("myStackImages", myStackImages);
+        model.addAttribute("notMyStack", notMyStack);
+        model.addAttribute("myStack", myStack);
+
+        return "stackForm";
     }
 
-    @Test
-    void findSelectedStackNames()
+    //==스택 추가==//
+    @PostMapping("/stackManagement")
+    @Transactional
+    public String StackSaveForm(@RequestParam(value = "addStacks", required = false) List<String> addStacks,
+                                @RequestParam(value = "removeStacks", required = false) List<String> removeStacks)
     {
-        List<String> list = stackService.findSelectedStackNames();
-        assertThat(list.size()).isEqualTo(3);
-        assertThat(list).contains(spring.getName());
-        assertThat(list).contains(mySql.getName());
-        assertThat(list).contains(java.getName());
-    }
-
-    @Test
-    void findSelectedStackUrls()
-    {
-        List<String> list = stackService.findSelectedStackUrls();
-        assertThat(list.size()).isEqualTo(3);
-        assertThat(list).contains(spring.getImageUrl());
-        assertThat(list).contains(mySql.getImageUrl());
-        assertThat(list).contains(java.getImageUrl());
-    }
-
-    @Test
-    void findUnselectedStackNames()
-    {
-        List<String> list = stackService.findUnselectedStackNames();
-        assertThat(list.size()).isEqualTo(2);
-        assertThat(list).contains(flask.getName());
-        assertThat(list).contains(typeScript.getName());
+        stackService.addMyStack(addStacks);
+        stackService.removeMyStack(removeStacks);
+        return "redirect:/stackManagement";
     }
 }

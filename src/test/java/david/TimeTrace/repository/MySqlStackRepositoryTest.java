@@ -27,6 +27,8 @@ class MySqlStackRepositoryTest
     @BeforeEach
     void init()
     {
+        stackRepository.clearAll();
+
         String springUrl = "https://camo.githubusercontent.com/b908952ccc693aefea57c4f782dc41100366de07dee108f01cde69fd3c1e1bc1/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f737072696e672d3644423333463f7374796c653d666f722d7468652d6261646765266c6f676f3d737072696e67266c6f676f436f6c6f723d7768697465";
         String mySqlUrl = "https://camo.githubusercontent.com/d61eb16e74c265915596a84a51d5b50229367ad16915ca42da51f1a021bb3750/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6d7973716c2d3434373941313f7374796c653d666f722d7468652d6261646765266c6f676f3d6d7973716c266c6f676f436f6c6f723d7768697465";
         String javaUrl = "https://camo.githubusercontent.com/3803468498d4b21719aced19028e21a6da499a5612de47661042d22997d8e8af/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6a6176612d3030373339363f7374796c653d666f722d7468652d6261646765266c6f676f3d6a617661266c6f676f436f6c6f723d7768697465";
@@ -68,12 +70,6 @@ class MySqlStackRepositoryTest
         stackRepository.save(java);
         stackRepository.save(typeScript);
         stackRepository.save(flask);
-    }
-
-    @AfterEach
-    void cleanUp()
-    {
-        stackRepository.clearAll();
     }
 
     @Test
