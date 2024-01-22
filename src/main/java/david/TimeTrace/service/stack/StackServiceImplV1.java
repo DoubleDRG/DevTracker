@@ -1,7 +1,8 @@
-package david.TimeTrace.service;
+package david.TimeTrace.service.stack;
 
 import david.TimeTrace.domain.Stack;
-import david.TimeTrace.repository.StackRepository;
+import david.TimeTrace.repository.stack.StackRepository;
+import david.TimeTrace.service.stack.StackService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

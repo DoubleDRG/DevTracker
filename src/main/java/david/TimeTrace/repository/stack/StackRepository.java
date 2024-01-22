@@ -1,4 +1,4 @@
-package david.TimeTrace.repository;
+package david.TimeTrace.repository.stack;
 
 import david.TimeTrace.domain.Stack;
 

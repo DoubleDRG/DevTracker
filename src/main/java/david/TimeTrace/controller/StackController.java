@@ -1,8 +1,7 @@
 package david.TimeTrace.controller;
 
 import david.TimeTrace.domain.Stack;
-import david.TimeTrace.service.StackService;
-import jakarta.annotation.Nullable;
+import david.TimeTrace.service.stack.StackService;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,10 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -89,7 +86,6 @@ public class StackController
 
     //==스택 추가==//
     @PostMapping("/stackManagement")
-    @Transactional
     public String StackSaveForm(@RequestParam(value = "addStacks", required = false) List<String> addStacks,
                                 @RequestParam(value = "removeStacks", required = false) List<String> removeStacks)
     {

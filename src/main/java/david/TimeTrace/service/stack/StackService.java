@@ -1,7 +1,6 @@
-package david.TimeTrace.service;
+package david.TimeTrace.service.stack;
 
 import david.TimeTrace.domain.Stack;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

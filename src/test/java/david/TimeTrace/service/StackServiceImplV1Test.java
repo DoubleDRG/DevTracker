@@ -1,10 +1,7 @@
 package david.TimeTrace.service;
 
 import david.TimeTrace.domain.Stack;
-import david.TimeTrace.repository.MySqlStackRepository;
-import org.aspectj.lang.annotation.RequiredTypes;
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
+import david.TimeTrace.service.stack.StackService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

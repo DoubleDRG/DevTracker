@@ -1,7 +1,7 @@
 package david.TimeTrace.repository;
 
 import david.TimeTrace.domain.Stack;
-import org.junit.jupiter.api.AfterEach;
+import david.TimeTrace.repository.stack.StackRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
