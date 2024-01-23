@@ -27,7 +27,7 @@ public class ActivityController
     public String activityAddForm(Model model)
     {
         List<String> stacks = stackService.findSelectedStackNames();
-        model.addAttribute("stacks",stacks);
+        model.addAttribute("stacks", stacks);
         return "/activity/activityAddForm";
     }
 
@@ -40,7 +40,7 @@ public class ActivityController
     {
         ActivitySaveDto saveDto = new ActivitySaveDto(title, stacks, startTime, endTime, content);
         activityService.save(saveDto);
-        return "redirect:/" + startTime.getYear() +"/"+startTime.getMonthValue();
+        return "redirect:/" + startTime.getYear() + "/" + startTime.getMonthValue();
     }
 
     //==상세 글 조회==//
@@ -50,5 +50,16 @@ public class ActivityController
         ActivityDetailShowDto showDto = activityService.findById(id);
         model.addAttribute("activity", showDto);
         return "/activity/activityDetailForm";
+    }
+
+
+    @GetMapping("/activity/delete/{id}")
+    public String activityDelete(@PathVariable("id") Long id) throws JsonProcessingException
+    {
+        ActivityDetailShowDto activity = activityService.findById(id);
+        int year = activity.getStartTime().getYear();
+        int month = activity.getStartTime().getMonthValue();
+        activityService.delete(id);
+        return "redirect:/" + year + "/" + month;
     }
 }

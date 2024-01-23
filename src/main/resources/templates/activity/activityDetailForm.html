@@ -19,42 +19,42 @@
 
     <div class="container" id="stack">
         <label class="fw-bold" for="title">제목</label>
-<!--        <input type="text" class="form-control" id="title" value="제목" th:value="${activity.title}" disabled>-->
         <div class="card pl-4 pt-3 pb-3 pr-4" id="title" th:text="${activity.title}">제목1</div>
         <br>
 
         <label class="fw-bold" for="stack">스택</label>
         <div class="card">
             <div class="col mt-3 mb-3 text-left">
-                <img class="pt-1 pb-1 pl-1 pr-1" th:each="stackUrl:${activity.stackImages}" th:src="${stackUrl}" alt="Stack Logo">
+                <img class="pt-1 pb-1 pl-1 pr-1" th:each="stackUrl:${activity.stackImages}" th:src="${stackUrl}"
+                     alt="Stack Logo">
             </div>
         </div>
         <br>
 
         <div>
             <label class="fw-bold" for="startTime">시작시간</label>
-            <div class="card pl-4 pt-3 pb-3 pr-4" id="startTime" th:text="${#temporals.format(activity.startTime,'yyyy년 MM월 dd일 hh시 mm분')}"></div>
-<!--            <input type="datetime-local" class="form-control" id="startTime">-->
+            <div class="card pl-4 pt-3 pb-3 pr-4" id="startTime"
+                 th:text="${#temporals.format(activity.startTime,'yyyy-MM-dd hh시 mm분')}"></div>
         </div>
         <br>
 
         <div>
             <label class="fw-bold" for="endTime">종료시간</label>
-            <div class="card pl-4 pt-3 pb-3 pr-4" id="endTime" th:text="${#temporals.format(activity.endTime,'yyyy년 MM월 dd일 hh시 mm분')}"></div>
-<!--            <input type="datetime-local" class="form-control" id="endTime">-->
+            <div class="card pl-4 pt-3 pb-3 pr-4" id="endTime"
+                 th:text="${#temporals.format(activity.endTime,'yyyy-MM-dd hh시 mm분')}"></div>
         </div>
         <br>
 
         <div>
             <label class="fw-bold" for="content">내용</label>
-<!--            <p id="content">내용</p>-->
             <div class="card p-4" id="content" th:utext="${activity.content}">내용</div>
         </div>
         <br>
 
         <hr style="height: 2px; color: black; background-color: black;">
-        <button class="btn btn-primary" type="submit">수정하기</button>
-        <button class="btn btn-secondary" type="submit">돌아가기</button>
+        <a class="btn btn-success" href="#" th:href="hello">수정하기</a>
+        <a class="btn btn-danger" href="#" th:href="|/activity/delete/${activity.id}|">삭제하기</a>
+        <a class="btn btn-secondary" href="#" th:href="|/${#temporals.format(activity.startTime,'yyyy')}/${#temporals.format(activity.startTime,'MM')}|">돌아가기</a>
     </div>
 </div>
 
