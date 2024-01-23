@@ -1,11 +1,11 @@
 package david.TimeTrace.repository.activity;
 
 import david.TimeTrace.domain.Activity;
+import david.TimeTrace.domain.TimeAndDuration;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -55,11 +55,11 @@ public class MySqlActivityRepository implements ActivityRepository
     }
 
     @Override
-    public List<Duration> findLast4MonthDuration(LocalDateTime now)
+    public List<TimeAndDuration> findLast4MonthDuration(LocalDateTime now)
     {
-        LocalDateTime fourMonthAgo = now.minusMonths(4);
-        String query = "select a.duration from Activity a where a.startTime >= :fourMonthAgo";
-        return entityManager.createQuery(query, Duration.class)
+        LocalDateTime fourMonthAgo = now.minusMonths(4).withDayOfMonth(1);
+        String query = "select a.startTime, a.duration from Activity a where a.startTime >= :fourMonthAgo Order by a.startTime asc";
+        return entityManager.createQuery(query, TimeAndDuration.class)
                 .setParameter("fourMonthAgo", fourMonthAgo)
                 .getResultList();
     }

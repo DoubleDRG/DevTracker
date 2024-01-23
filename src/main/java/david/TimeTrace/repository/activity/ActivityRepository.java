@@ -1,8 +1,8 @@
 package david.TimeTrace.repository.activity;
 
 import david.TimeTrace.domain.Activity;
+import david.TimeTrace.domain.TimeAndDuration;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,7 +16,7 @@ public interface ActivityRepository
 
     public List<Activity> findByDay(int year, int month, int day);
 
-    public List<Duration> findLast4MonthDuration(LocalDateTime now);
+    public List<TimeAndDuration> findLast4MonthDuration(LocalDateTime now);
 
     public void remove(Long id);
 

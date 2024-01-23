@@ -1,7 +1,7 @@
 package david.TimeTrace.repository.activity;
 
 import david.TimeTrace.domain.Activity;
-import org.assertj.core.api.Assertions;
+import david.TimeTrace.domain.TimeAndDuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ class MySqlActivityRepositoryTest
     private Activity springActivity;
     private Activity jpaActivity;
     private Activity flaskActivity;
-    LocalDateTime now = LocalDateTime.of(2024,1,20,13,0);
+    LocalDateTime now = LocalDateTime.of(2024, 1, 20, 13, 0);
 
     @BeforeEach
     void init()
@@ -36,7 +36,7 @@ class MySqlActivityRepositoryTest
                 .stacks("{'spring':'springUrl','jpa':'jpaUrl'}")
                 .startTime(now.minusHours(1))
                 .endTime(now)
-                .duration(Duration.between(now.minusHours(1),now))
+                .duration(Duration.between(now.minusHours(1), now))
                 .content("content")
                 .build();
 
@@ -45,16 +45,17 @@ class MySqlActivityRepositoryTest
                 .stacks("{'spring':'springUrl','jpa':'jpaUrl'}")
                 .startTime(now.minusHours(2))
                 .endTime(now.minusHours(1))
-                .duration(Duration.between(now.minusHours(2),now.minusHours(1)))
+                .duration(Duration.between(now.minusHours(2), now.minusHours(1)))
                 .content("content")
                 .build();
+
 
         flaskActivity = Activity.builder()
                 .title("flaskTitle")
                 .stacks("{'flask':'flaskUrl','mongoDB':'mongoUrl'}")
                 .startTime(now.minusMonths(1))
                 .endTime(now.minusMonths(1))
-                .duration(Duration.between(now.minusMonths(1),now.minusMonths(1)))
+                .duration(Duration.between(now.minusMonths(1), now.minusMonths(1)))
                 .content("content")
                 .build();
 
@@ -101,19 +102,28 @@ class MySqlActivityRepositoryTest
     @Test
     void findLast4MonthDuration()
     {
-        List<Duration> list = activityRepository.findLast4MonthDuration(now);
+        List<TimeAndDuration> list = activityRepository.findLast4MonthDuration(now);
         assertThat(list.size()).isEqualTo(3);
-        assertThat(list.contains(Duration.ofHours(1))).isEqualTo(true);
+        assertThat(list.contains(TimeAndDuration.builder()
+                .startTime(now.minusHours(1))
+                .duration(Duration.ofHours(1))
+                .build())).isEqualTo(true);
+
+        assertThat(list.get(0)).isEqualTo(TimeAndDuration.builder()
+                .startTime(flaskActivity.getStartTime())
+                .duration(flaskActivity.getDuration())
+                .build());
     }
 
     @Test
     void remove()
     {
-        Activity find = activityRepository.findById(1L);
+        Activity find = activityRepository.findById(springActivity.getId());
         activityRepository.remove(find.getId());
 
-        List<Duration> list = activityRepository.findLast4MonthDuration(now);
-        assertThat(list.size()).isEqualTo(2);
+        List<Activity> list = activityRepository.findByMonth(now.getYear(), now.getMonthValue());
+
+        assertThat(list.size()).isEqualTo(1);
 
         List<Activity> list2 = activityRepository.findByMonth(now.getYear(), now.getMonthValue());
         assertThat(list2.contains(springActivity)).isEqualTo(false);
