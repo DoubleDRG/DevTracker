@@ -1,6 +1,5 @@
 package david.TimeTrace.service.chart;
 
-import david.TimeTrace.domain.ActivitySummary;
 import david.TimeTrace.domain.ActivityTime;
 
 import java.time.Duration;
@@ -14,5 +13,4 @@ public interface ChartService
 
     public HashMap<LocalDateTime, List<ActivityTime>> getActivityTimes(LocalDateTime targetDate);
 
-    public HashMap<LocalDateTime, List<ActivitySummary>> getActivitySummaries(LocalDateTime targetDate);
 }

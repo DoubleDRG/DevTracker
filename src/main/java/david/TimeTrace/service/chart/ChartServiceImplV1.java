@@ -1,7 +1,6 @@
 package david.TimeTrace.service.chart;
 
 import david.TimeTrace.domain.Activity;
-import david.TimeTrace.domain.ActivitySummary;
 import david.TimeTrace.domain.ActivityTime;
 import david.TimeTrace.repository.activity.ActivityRepository;
 import lombok.RequiredArgsConstructor;
@@ -61,10 +60,5 @@ public class ChartServiceImplV1 implements ChartService
         return null;
     }
 
-    @Override
-    public HashMap<LocalDateTime, List<ActivitySummary>> getActivitySummaries(LocalDateTime targetDate)
-    {
-        return null;
-    }
 }
 

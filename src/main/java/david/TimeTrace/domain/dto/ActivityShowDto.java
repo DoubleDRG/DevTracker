@@ -1,4 +1,4 @@
-package david.TimeTrace.domain;
+package david.TimeTrace.domain.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class ActivitySummary
+public class ActivityShowDto
 {
     private Long id;
     private String title;
@@ -14,7 +14,7 @@ public class ActivitySummary
     private List<String> stackImages;
 
     @Builder
-    public ActivitySummary(Long id, String title, String content, List<String> stackImages)
+    public ActivityShowDto(Long id, String title, String content, List<String> stackImages)
     {
         this.id = id;
         this.title = title;

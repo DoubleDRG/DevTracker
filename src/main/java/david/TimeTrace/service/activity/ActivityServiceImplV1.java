@@ -1,21 +1,23 @@
 package david.TimeTrace.service.activity;
 
+import aj.org.objectweb.asm.TypeReference;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import david.TimeTrace.domain.Activity;
 import david.TimeTrace.domain.Stack;
 import david.TimeTrace.domain.dto.ActivitySaveDto;
+import david.TimeTrace.domain.dto.ActivityShowDto;
 import david.TimeTrace.repository.activity.ActivityRepository;
 import david.TimeTrace.repository.stack.StackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.Duration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
 
 @Transactional
 @RequiredArgsConstructor
@@ -51,12 +53,51 @@ public class ActivityServiceImplV1 implements ActivityService
         List<String> list = saveDto.getStacks();
         Map<String, String> map = new HashMap<>();
 
+        if (list == null) return "{}";
+
         for (String stackName : list)
         {
+
             Optional<Stack> stack = stackRepository.findByName(stackName);
             stack.ifPresent(s -> map.put(s.getName(), s.getImageUrl()));
         }
         return objectMapper.writeValueAsString(map);
+    }
+
+    @Override
+    public Map<LocalDate, List<ActivityShowDto>> findActivitiesByMonth(int year, int month) throws JsonProcessingException
+    {
+        List<Activity> activities = activityRepository.findByMonth(year, month);
+        LinkedHashMap<LocalDate, List<ActivityShowDto>> map = new LinkedHashMap<>();
+
+        // 최신순
+        // {날짜1: [activity1, activity2, ...]}
+        // {날짜2: [activity1, activity2, activity3, ...]}
+        for (Activity activity : activities)
+        {
+            LocalDate date = activity.getStartTime().toLocalDate();
+
+            HashMap<String, String> stackMap = objectMapper.readValue(activity.getStacks(),HashMap.class);
+            List<String> stackUrls = new ArrayList<>(stackMap.values());
+
+            ActivityShowDto activityShowDto = new ActivityShowDto(
+                    activity.getId(),
+                    activity.getTitle(),
+                    activity.getContent(),
+                    stackUrls);
+
+            if (map.containsKey(date))
+            {
+
+                map.get(date).add(activityShowDto);
+            } else
+            {
+                ArrayList<ActivityShowDto> list = new ArrayList<>();
+                list.add(activityShowDto);
+                map.put(date, list);
+            }
+        }
+        return map;
     }
 
     @Override

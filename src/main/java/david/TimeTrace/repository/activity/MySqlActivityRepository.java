@@ -31,7 +31,7 @@ public class MySqlActivityRepository implements ActivityRepository
     {
         String query =
                 "select a from Activity a where YEAR(a.startTime) =:year " +
-                "and MONTH(a.startTime) =: month";
+                "and MONTH(a.startTime) =: month order by a.startTime desc";
         return entityManager.createQuery(query, Activity.class)
                 .setParameter("year", year)
                 .setParameter("month", month)

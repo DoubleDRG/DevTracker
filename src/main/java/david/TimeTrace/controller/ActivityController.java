@@ -35,13 +35,15 @@ public class ActivityController
     @ResponseBody
     @PostMapping("/activity")
     public String activitySave(@RequestParam("title") String title,
-                               @RequestParam("stacks") List<String> stacks,
+                               @RequestParam(value = "stacks", required = false) List<String> stacks,
                                @RequestParam("startTime") LocalDateTime startTime,
                                @RequestParam("endTime") LocalDateTime endTime,
-                               @RequestParam("content") String content) throws JsonProcessingException
+                               @RequestParam(value = "content", required = false) String content) throws JsonProcessingException
     {
         ActivitySaveDto saveDto = new ActivitySaveDto(title, stacks, startTime, endTime, content);
         activityService.save(saveDto);
         return "ok";
     }
+
+
 }
