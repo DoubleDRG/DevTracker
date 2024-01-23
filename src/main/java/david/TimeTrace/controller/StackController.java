@@ -70,7 +70,7 @@ public class StackController
     }
 
     //==스택관리 창 보여주기==//
-    @GetMapping("/stackManagement")
+    @GetMapping("/stack")
     public String StackManageForm(Model model)
     {
         List<String> myStackImages = stackService.findSelectedStackUrls();
@@ -85,12 +85,12 @@ public class StackController
     }
 
     //==스택 추가==//
-    @PostMapping("/stackManagement")
+    @PostMapping("/stack")
     public String StackSaveForm(@RequestParam(value = "addStacks", required = false) List<String> addStacks,
                                 @RequestParam(value = "removeStacks", required = false) List<String> removeStacks)
     {
         stackService.addMyStack(addStacks);
         stackService.removeMyStack(removeStacks);
-        return "redirect:/stackManagement";
+        return "redirect:/stack";
     }
 }

@@ -19,6 +19,8 @@ public class ChartServiceImplV1 implements ChartService
 {
     private final ActivityRepository activityRepository;
 
+
+    // === 반드시 테스트 코드 작성할 것!! ==//
     // 3 * 31 2차원 배열 반환
     // [0,0,0,7,5,1,...,8] => 이번달
     // [8,1,2,3,5,1,...,8] => 1달전
@@ -48,7 +50,7 @@ public class ChartServiceImplV1 implements ChartService
         for (Activity activity : list)
         {
             int day = activity.getStartTime().getDayOfMonth();
-            durations[day - 1] = durations[day-1].plus(activity.getDuration());
+            durations[day - 1] = durations[day-1].plus(Duration.ofSeconds(activity.getDuration()));
         }
         return durations;
     }

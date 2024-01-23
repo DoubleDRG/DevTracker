@@ -1,7 +1,6 @@
 package david.TimeTrace.repository.activity;
 
 import david.TimeTrace.domain.Activity;
-import david.TimeTrace.domain.TimeAndDuration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ class MySqlActivityRepositoryTest
                 .stacks("{'spring':'springUrl','jpa':'jpaUrl'}")
                 .startTime(now.minusHours(1))
                 .endTime(now)
-                .duration(Duration.between(now.minusHours(1), now))
+                .duration(Duration.between(now.minusHours(1), now).getSeconds())
                 .content("content")
                 .build();
 
@@ -45,7 +44,7 @@ class MySqlActivityRepositoryTest
                 .stacks("{'spring':'springUrl','jpa':'jpaUrl'}")
                 .startTime(now.minusHours(2))
                 .endTime(now.minusHours(1))
-                .duration(Duration.between(now.minusHours(2), now.minusHours(1)))
+                .duration(Duration.between(now.minusHours(2), now.minusHours(1)).getSeconds())
                 .content("content")
                 .build();
 
@@ -55,7 +54,7 @@ class MySqlActivityRepositoryTest
                 .stacks("{'flask':'flaskUrl','mongoDB':'mongoUrl'}")
                 .startTime(now.minusMonths(1))
                 .endTime(now.minusMonths(1))
-                .duration(Duration.between(now.minusMonths(1), now.minusMonths(1)))
+                .duration(Duration.between(now.minusMonths(1), now.minusMonths(1)).getSeconds())
                 .content("content")
                 .build();
 
@@ -97,22 +96,6 @@ class MySqlActivityRepositoryTest
         assertThat(list.size()).isEqualTo(2);
         assertThat(list.contains(springActivity)).isEqualTo(true);
         assertThat(list.contains(jpaActivity)).isEqualTo(true);
-    }
-
-    @Test
-    void findLast4MonthDuration()
-    {
-        List<TimeAndDuration> list = activityRepository.findLast4MonthDuration(now);
-        assertThat(list.size()).isEqualTo(3);
-        assertThat(list.contains(TimeAndDuration.builder()
-                .startTime(now.minusHours(1))
-                .duration(Duration.ofHours(1))
-                .build())).isEqualTo(true);
-
-        assertThat(list.get(0)).isEqualTo(TimeAndDuration.builder()
-                .startTime(flaskActivity.getStartTime())
-                .duration(flaskActivity.getDuration())
-                .build());
     }
 
     @Test
