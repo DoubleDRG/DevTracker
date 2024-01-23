@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import david.TimeTrace.domain.Activity;
 import david.TimeTrace.domain.Stack;
+import david.TimeTrace.domain.dto.ActivityDetailShowDto;
 import david.TimeTrace.domain.dto.ActivitySaveDto;
 import david.TimeTrace.domain.dto.ActivityShowDto;
 import david.TimeTrace.repository.activity.ActivityRepository;
@@ -68,36 +69,21 @@ public class ActivityServiceImplV1 implements ActivityService
     public Map<LocalDate, List<ActivityShowDto>> findActivitiesByMonth(int year, int month) throws JsonProcessingException
     {
         List<Activity> activities = activityRepository.findByMonth(year, month);
-        LinkedHashMap<LocalDate, List<ActivityShowDto>> map = new LinkedHashMap<>();
+        return transferActivityToActivityShowDto(activities);
+    }
 
-        // 최신순
-        // {날짜1: [activity1, activity2, ...]}
-        // {날짜2: [activity1, activity2, activity3, ...]}
-        for (Activity activity : activities)
-        {
-            LocalDate date = activity.getStartTime().toLocalDate();
-
-            HashMap<String, String> stackMap = objectMapper.readValue(activity.getStacks(),HashMap.class);
-            List<String> stackUrls = new ArrayList<>(stackMap.values());
-
-            ActivityShowDto activityShowDto = new ActivityShowDto(
-                    activity.getId(),
-                    activity.getTitle(),
-                    activity.getContent(),
-                    stackUrls);
-
-            if (map.containsKey(date))
-            {
-
-                map.get(date).add(activityShowDto);
-            } else
-            {
-                ArrayList<ActivityShowDto> list = new ArrayList<>();
-                list.add(activityShowDto);
-                map.put(date, list);
-            }
-        }
-        return map;
+    @Override
+    public ActivityDetailShowDto findById(Long id) throws JsonProcessingException
+    {
+        Activity activity = activityRepository.findById(id);
+        return ActivityDetailShowDto.builder()
+                .id(activity.getId())
+                .title(activity.getTitle())
+                .stackImages(transferStackJsonToStackList(activity.getStacks()))
+                .startTime(activity.getStartTime())
+                .endTime(activity.getEndTime())
+                .content(activity.getContent())
+                .build();
     }
 
     @Override
@@ -117,5 +103,45 @@ public class ActivityServiceImplV1 implements ActivityService
     public void delete(Long id)
     {
         activityRepository.remove(id);
+    }
+
+    private LinkedHashMap<LocalDate, List<ActivityShowDto>> transferActivityToActivityShowDto(List<Activity> activities) throws JsonProcessingException
+    {
+        LinkedHashMap<LocalDate, List<ActivityShowDto>> map = new LinkedHashMap<>();
+
+        // 최신순
+        // {날짜1: [activity1, activity2, ...]}
+        // {날짜2: [activity1, activity2, activity3, ...]}
+        for (Activity activity : activities)
+        {
+            LocalDate date = activity.getStartTime().toLocalDate();
+            String stacks = activity.getStacks();
+
+            List<String> stackUrls = transferStackJsonToStackList(stacks);
+
+            ActivityShowDto activityShowDto = new ActivityShowDto(
+                    activity.getId(),
+                    activity.getTitle(),
+                    activity.getContent(),
+                    stackUrls);
+
+            if (map.containsKey(date))
+            {
+                map.get(date).add(activityShowDto);
+            } else
+            {
+                ArrayList<ActivityShowDto> list = new ArrayList<>();
+                list.add(activityShowDto);
+                map.put(date, list);
+            }
+        }
+        return map;
+    }
+
+    private List<String> transferStackJsonToStackList(String stacks) throws JsonProcessingException
+    {
+        HashMap<String, String> stackMap = objectMapper.readValue(stacks,HashMap.class);
+        List<String> stackUrls = new ArrayList<>(stackMap.values());
+        return stackUrls;
     }
 }
