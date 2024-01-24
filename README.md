@@ -66,4 +66,6 @@
 </div>
 
 <ph4 class="has-line-data" data-line-start="43" data-line-end="44">성장기록 영상</h4>
-![기록 영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/a0383bb5-06ea-40f6-a57e-fa7ec63566a0)
+<div>
+  ![기록 영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/a0383bb5-06ea-40f6-a57e-fa7ec63566a0)
+</div>
