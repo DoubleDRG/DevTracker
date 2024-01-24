@@ -61,11 +61,7 @@
 
 <h2 class="code-line" data-line-start=39 data-line-end=40 ><a id="_39"></a>시연영상</h2>
 <h4 class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</h4>
-<div>
-  ![스택관리영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/8407046b-db8e-4aed-8638-545988409454)
-</div>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/8407046b-db8e-4aed-8638-545988409454"></img>
 
 <ph4 class="has-line-data" data-line-start="43" data-line-end="44">성장기록 영상</h4>
-<div>
-  ![기록 영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/a0383bb5-06ea-40f6-a57e-fa7ec63566a0)
-</div>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/a0383bb5-06ea-40f6-a57e-fa7ec63566a0"></img>
