@@ -53,7 +53,7 @@
 <h4 class="has-line-data" data-line-start="33" data-line-end="34">메인화면</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/545fa024-bc14-4668-8928-30573b555942" width="50%"></img>
 
-<h4 class="has-line-data" data-line-start="35" data-line-end="36">성장기록 화면</h4>
+<h4 class="has-line-data" data-line-start="35" data-line-end="36">기록 화면</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/32c41d99-8506-4f64-a11d-0771f4c5c212" width="50%"></img>
 
 <h4 class="has-line-data" data-line-start="37" data-line-end="38">내 기술 등록 화면</h4>
@@ -63,5 +63,5 @@
 <h4 class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/8407046b-db8e-4aed-8638-545988409454" width="70%></img>
 
-<h4 class="has-line-data" data-line-start="45" data-line-end="46">내 기술 등록 영상</h4>
+<h4 class="has-line-data" data-line-start="47" data-line-end="48">기록 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/b5203ce6-a13a-4688-a76a-c1cf590871d6" width="70%"></img>
