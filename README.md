@@ -62,10 +62,10 @@
 <h2 class="code-line" data-line-start=39 data-line-end=40 ><a id="_39"></a>시연영상</h2>
 
 <h4>기록 영상</h4>
-![기록영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/8989701f-a313-4d2b-8527-9c3bd228c12b)
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/8989701f-a313-4d2b-8527-9c3bd228c12b"></img>
 
 <h4>스택 관리 영상</h4>
-![스택관리영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/40e7cbdb-fa52-4d64-9519-f7d9df651bb1)
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/40e7cbdb-fa52-4d64-9519-f7d9df651bb1"></img>
 
   
 
