@@ -50,7 +50,7 @@
 <li class="has-line-data" data-line-start="30" data-line-end="32"><a href="https://getbootstrap.com/">BootStrap</a> - 강력한 확장성 및 풍부한 기능을 바탕으로 HTML 템플릿을 더 아름답게 만들어줍니다.</li>
 </ul>
 <h2 class="code-line" data-line-start=32 data-line-end=33 ><a id="_32"></a>스크린샷</h2>
-<p class="has-line-data" data-line-start="33" data-line-end="34">메인화면 ![홈 대표 화면](https://github.com/DoubleDRG/DevTracker/assets/147648419/7b9a4c6b-691b-4ca3-bd45-0302a306b623)
+<p class="has-line-data" data-line-start="33" data-line-end="34">메인화면 ![홈 대표 화면](./assets/147648419/7b9a4c6b-691b-4ca3-bd45-0302a306b623)
 </p>
 
 <p class="has-line-data" data-line-start="35" data-line-end="36">성장기록 화면</p>
