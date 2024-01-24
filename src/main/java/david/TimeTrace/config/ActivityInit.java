@@ -26,7 +26,7 @@ public class ActivityInit
         LocalDateTime start = LocalDateTime.of(2023, 11, 1, 0, 0, 0);
         LocalDateTime end = LocalDateTime.of(2024, 1, 31, 23, 59, 59);
 
-        for(int i = 0; i< 100; i++)
+        for(int i = 0; i< 200; i++)
         {
             LocalDateTime randomDateTime = getRandomDateTime(start, end);
             int randomHours = ThreadLocalRandom.current().nextInt(1, 6);
