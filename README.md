@@ -64,7 +64,7 @@
 <h4 class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/8407046b-db8e-4aed-8638-545988409454" width="70%></img>
   
-<h4 class="has-line-data" data-line-start="100" data-line-end="101>기록 영상</h4>
+<h4 class="has-line-data" data-line-start="51" data-line-end="52>기록 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/9d5c3687-a3c7-4ae5-90dd-a47662b0dacd" width="80%"></img>
 
 
