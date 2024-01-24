@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import david.TimeTrace.domain.Activity;
 import david.TimeTrace.domain.dto.ActivityDetailShowDto;
 import david.TimeTrace.domain.dto.ActivitySaveDto;
+import david.TimeTrace.domain.dto.ActivityUpdateDto;
 import david.TimeTrace.service.activity.ActivityService;
 import david.TimeTrace.service.stack.StackService;
 import lombok.RequiredArgsConstructor;
@@ -63,10 +64,26 @@ public class ActivityController
     }
 
     @GetMapping("/activity/edit/{id}")
-    public String activityEdit(@PathVariable("id") Long id, Model model) throws JsonProcessingException
+    public String activityEditForm(@PathVariable("id") Long id, Model model) throws JsonProcessingException
     {
         ActivityDetailShowDto showDto= activityService.getActivityDetailShowDto(id);
+        List<String> selectedStacks = stackService.findSelectedStackNames();
+
         model.addAttribute("activity", showDto);
+        model.addAttribute("selectedStacks", selectedStacks);
         return "/activity/activityEditForm";
+    }
+
+    @PostMapping("/activity/edit/{id}")
+    public String activityEdit(@PathVariable("id") Long id,
+                               @RequestParam("title") String title,
+                               @RequestParam(value = "stacks", required = false) List<String> stacks,
+                               @RequestParam("startTime") LocalDateTime startTime,
+                               @RequestParam("endTime") LocalDateTime endTime,
+                               @RequestParam(value = "content", required = false) String content) throws JsonProcessingException
+    {
+        ActivityUpdateDto updateDto = new ActivityUpdateDto(title, stacks, startTime, endTime, content);
+        activityService.update(id, updateDto);
+        return "redirect:/activity/"+id;
     }
 }

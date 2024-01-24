@@ -1,6 +1,5 @@
 package david.TimeTrace.service.activity;
 
-import aj.org.objectweb.asm.TypeReference;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import david.TimeTrace.domain.Activity;
@@ -8,16 +7,15 @@ import david.TimeTrace.domain.Stack;
 import david.TimeTrace.domain.dto.ActivityDetailShowDto;
 import david.TimeTrace.domain.dto.ActivitySaveDto;
 import david.TimeTrace.domain.dto.ActivityShowDto;
+import david.TimeTrace.domain.dto.ActivityUpdateDto;
 import david.TimeTrace.repository.activity.ActivityRepository;
 import david.TimeTrace.repository.stack.StackRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 
 @Transactional
@@ -65,6 +63,22 @@ public class ActivityServiceImplV1 implements ActivityService
         return objectMapper.writeValueAsString(map);
     }
 
+    private String extractStackJson(ActivityUpdateDto updateDto) throws JsonProcessingException
+    {
+        List<String> list = updateDto.getStacks();
+        Map<String, String> map = new HashMap<>();
+
+        if (list == null) return "{}";
+
+        for (String stackName : list)
+        {
+
+            Optional<Stack> stack = stackRepository.findByName(stackName);
+            stack.ifPresent(s -> map.put(s.getName(), s.getImageUrl()));
+        }
+        return objectMapper.writeValueAsString(map);
+    }
+
     @Override
     public Map<LocalDate, List<ActivityShowDto>> findActivitiesByMonth(int year, int month) throws JsonProcessingException
     {
@@ -85,7 +99,8 @@ public class ActivityServiceImplV1 implements ActivityService
         return ActivityDetailShowDto.builder()
                 .id(activity.getId())
                 .title(activity.getTitle())
-                .stackImages(transferStackJsonToStackList(activity.getStacks()))
+                .stackNames(transferStackNameJsonToStackNameList(activity.getStacks()))
+                .stackImages(transferStackUrlJsonToStackUrlList(activity.getStacks()))
                 .startTime(activity.getStartTime())
                 .endTime(activity.getEndTime())
                 .content(activity.getContent())
@@ -93,15 +108,18 @@ public class ActivityServiceImplV1 implements ActivityService
     }
 
     @Override
-    public Activity update(Long id, Activity updateParam)
+    public Activity update(Long id, ActivityUpdateDto updateDto) throws JsonProcessingException
     {
         Activity activity = activityRepository.findById(id);
-        activity.setTitle(updateParam.getTitle());
-        activity.setStacks(updateParam.getStacks());
-        activity.setStartTime(updateParam.getStartTime());
-        activity.setEndTime(updateParam.getEndTime());
-        activity.setDuration(updateParam.getDuration());
-        activity.setContent(updateParam.getContent());
+        String stackJson = extractStackJson(updateDto);
+        Long durationSeconds = Duration.between(updateDto.getStartTime(), updateDto.getEndTime()).getSeconds();
+
+        activity.setTitle(updateDto.getTitle());
+        activity.setStacks(stackJson);
+        activity.setStartTime(updateDto.getStartTime());
+        activity.setEndTime(updateDto.getEndTime());
+        activity.setDuration(durationSeconds);
+        activity.setContent(updateDto.getContent());
         return activity;
     }
 
@@ -121,14 +139,15 @@ public class ActivityServiceImplV1 implements ActivityService
         for (Activity activity : activities)
         {
             LocalDate date = activity.getStartTime().toLocalDate();
-            String stacks = activity.getStacks();
 
-            List<String> stackUrls = transferStackJsonToStackList(stacks);
+            List<String> stackNames = transferStackNameJsonToStackNameList(activity.getStacks());
+            List<String> stackUrls = transferStackUrlJsonToStackUrlList(activity.getStacks());
 
             ActivityShowDto activityShowDto = new ActivityShowDto(
                     activity.getId(),
                     activity.getTitle(),
                     activity.getContent(),
+                    stackNames,
                     stackUrls);
 
             if (map.containsKey(date))
@@ -144,10 +163,15 @@ public class ActivityServiceImplV1 implements ActivityService
         return map;
     }
 
-    private List<String> transferStackJsonToStackList(String stacks) throws JsonProcessingException
+    private List<String> transferStackUrlJsonToStackUrlList(String stacks) throws JsonProcessingException
     {
         HashMap<String, String> stackMap = objectMapper.readValue(stacks,HashMap.class);
-        List<String> stackUrls = new ArrayList<>(stackMap.values());
-        return stackUrls;
+        return new ArrayList<>(stackMap.values());
+    }
+
+    private List<String> transferStackNameJsonToStackNameList(String stacks) throws JsonProcessingException
+    {
+        HashMap<String, String> stackMap = objectMapper.readValue(stacks,HashMap.class);
+        return new ArrayList<>(stackMap.keySet());
     }
 }

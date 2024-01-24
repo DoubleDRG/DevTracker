@@ -5,6 +5,7 @@ import david.TimeTrace.domain.Activity;
 import david.TimeTrace.domain.dto.ActivityDetailShowDto;
 import david.TimeTrace.domain.dto.ActivitySaveDto;
 import david.TimeTrace.domain.dto.ActivityShowDto;
+import david.TimeTrace.domain.dto.ActivityUpdateDto;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,7 +19,7 @@ public interface ActivityService
 
     public Activity findById(Long id);
     public ActivityDetailShowDto getActivityDetailShowDto(Long id) throws JsonProcessingException;
-    public Activity update(Long id, Activity updateParam);
+    public Activity update(Long id, ActivityUpdateDto updateDto) throws JsonProcessingException;
 
     public void delete(Long id);
 }

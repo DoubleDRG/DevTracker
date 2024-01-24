@@ -22,32 +22,32 @@
     <form th:action action="../home.html" method="post">
         <div>
             <label class="fw-bold" for="title">제목</label>
-            <input type="text" class="form-control" id="title" th:value="${activity.title}">
+            <input type="text" class="form-control" id="title" th:name="title" th:value="${activity.title}">
         </div>
 
         <br>
 
         <label class="fw-bold" for="stack">스택</label>
-        <select class = "form-select" name="stack" id="stack" multiple>
-            <option th:each="stackUrl:${activity.stackImages}">Spring</option>
+        <select class = "form-select" th:name="stacks" id="stack" multiple>
+            <option th:each="selectedStack:${selectedStacks}" th:value="${selectedStack}" th:text="${selectedStack}" th:selected="${activity.stackNames.contains(selectedStack)}">Spring</option>
         </select>
 
         <br>
         <div>
             <label class="fw-bold" for="startTime">시작시간</label>
-            <input type="datetime-local" class="form-control" id="startTime" th:value="${activity.startTime}">
+            <input type="datetime-local" class="form-control" id="startTime" th:name="startTime" th:value="${activity.startTime}">
         </div>
 
         <br>
         <div>
             <label class="fw-bold" for="endTime">종료시간</label>
-            <input type="datetime-local" class="form-control" id="endTime" th:value="${activity.endTime}">
+            <input type="datetime-local" class="form-control" id="endTime" th:name="endTime" th:value="${activity.endTime}">
         </div>
 
         <br>
         <div>
             <label class="fw-bold" for="myEditor">내용</label>
-            <textarea id="myEditor" th:utext="${activity.content}"></textarea>
+            <textarea id="myEditor" th:name="content" th:utext="${activity.content}"></textarea>
         </div>
 
         <br>

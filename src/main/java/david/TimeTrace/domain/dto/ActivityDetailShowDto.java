@@ -11,16 +11,18 @@ public class ActivityDetailShowDto
 {
     private Long id;
     private String title;
+    private List<String> stackNames;
     private List<String> stackImages;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private String Content;
 
     @Builder
-    public ActivityDetailShowDto(Long id, String title, List<String> stackImages, LocalDateTime startTime, LocalDateTime endTime, String content)
+    public ActivityDetailShowDto(Long id, String title, List<String> stackNames, List<String> stackImages, LocalDateTime startTime, LocalDateTime endTime, String content)
     {
         this.id = id;
         this.title = title;
+        this.stackNames = stackNames;
         this.stackImages = stackImages;
         this.startTime = startTime;
         this.endTime = endTime;
