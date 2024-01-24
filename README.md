@@ -60,8 +60,13 @@
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/b66ab975-3e62-493c-a673-3c15ac98b1c3" width="50%"></img>
 
 <h2 class="code-line" data-line-start=39 data-line-end=40 ><a id="_39"></a>시연영상</h2>
-<h4 class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</h4>
+<div>
+  <h4 class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/8407046b-db8e-4aed-8638-545988409454" width="70%></img>
-<br>
-<h4 class="has-line-data" data-line-start="70" data-line-end="71">기록 영상</h4>
+</div>
+
+<div>
+  <h4 class="has-line-data">기록 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/b5203ce6-a13a-4688-a76a-c1cf590871d6" width="70%"></img>
+</div>
+
