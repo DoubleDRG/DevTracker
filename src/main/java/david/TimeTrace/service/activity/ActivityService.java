@@ -7,7 +7,6 @@ import david.TimeTrace.domain.dto.ActivitySaveDto;
 import david.TimeTrace.domain.dto.ActivityShowDto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +16,8 @@ public interface ActivityService
 
     public Map<LocalDate,List<ActivityShowDto>> findActivitiesByMonth(int year, int month) throws JsonProcessingException;
 
-    public ActivityDetailShowDto findById(Long id) throws JsonProcessingException;
+    public Activity findById(Long id);
+    public ActivityDetailShowDto getActivityDetailShowDto(Long id) throws JsonProcessingException;
     public Activity update(Long id, Activity updateParam);
 
     public void delete(Long id);

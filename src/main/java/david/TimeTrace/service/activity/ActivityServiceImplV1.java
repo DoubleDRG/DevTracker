@@ -73,7 +73,13 @@ public class ActivityServiceImplV1 implements ActivityService
     }
 
     @Override
-    public ActivityDetailShowDto findById(Long id) throws JsonProcessingException
+    public Activity findById(Long id)
+    {
+        return activityRepository.findById(id);
+    }
+
+    @Override
+    public ActivityDetailShowDto getActivityDetailShowDto(Long id) throws JsonProcessingException
     {
         Activity activity = activityRepository.findById(id);
         return ActivityDetailShowDto.builder()

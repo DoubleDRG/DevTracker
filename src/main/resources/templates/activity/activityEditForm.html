@@ -7,7 +7,6 @@
           integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 </head>
 <body>
@@ -20,45 +19,39 @@
 
     <div><h2 class="text-start pl-4 mt-4"></h2></div>
 
-    <form action="../home.html" method="post">
+    <form th:action action="../home.html" method="post">
         <div>
             <label class="fw-bold" for="title">제목</label>
-            <input type="text" class="form-control" id="title" placeholder="제목을 입력해 주세요.">
+            <input type="text" class="form-control" id="title" th:value="${activity.title}">
         </div>
 
         <br>
 
         <label class="fw-bold" for="stack">스택</label>
         <select class = "form-select" name="stack" id="stack" multiple>
-            <option value="item1">Spring</option>
-            <option value="item2">Java</option>
-            <option value="item3">Spring JPA</option>
-            <option value="item4">Thymeleaf</option>
-            <option value="item5">MySQL</option>
-            <!-- 추가 옵션들 -->
+            <option th:each="stackUrl:${activity.stackImages}">Spring</option>
         </select>
 
         <br>
         <div>
             <label class="fw-bold" for="startTime">시작시간</label>
-            <input type="datetime-local" class="form-control" id="startTime">
+            <input type="datetime-local" class="form-control" id="startTime" th:value="${activity.startTime}">
         </div>
 
         <br>
         <div>
             <label class="fw-bold" for="endTime">종료시간</label>
-            <input type="datetime-local" class="form-control" id="endTime">
+            <input type="datetime-local" class="form-control" id="endTime" th:value="${activity.endTime}">
         </div>
 
         <br>
         <div>
             <label class="fw-bold" for="myEditor">내용</label>
-            <textarea id="myEditor"></textarea>
+            <textarea id="myEditor" th:utext="${activity.content}"></textarea>
         </div>
 
         <br>
         <button class="btn btn-primary" type="submit">수정완료</button>
-        <button class="btn btn-danger" type="submit">삭제하기</button>
         <button class="btn btn-secondary" type="submit">돌아가기</button>
     </form>
 </div>

@@ -52,7 +52,7 @@
         <br>
 
         <hr style="height: 2px; color: black; background-color: black;">
-        <a class="btn btn-success" href="#" th:href="hello">수정하기</a>
+        <a class="btn btn-success" href="#" th:href="|/activity/edit/${activity.id}|">수정하기</a>
         <a class="btn btn-danger" href="#" th:href="|/activity/delete/${activity.id}|">삭제하기</a>
         <a class="btn btn-secondary" href="#" th:href="|/${#temporals.format(activity.startTime,'yyyy')}/${#temporals.format(activity.startTime,'MM')}|">돌아가기</a>
     </div>

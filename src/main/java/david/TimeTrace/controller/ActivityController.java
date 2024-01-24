@@ -47,19 +47,26 @@ public class ActivityController
     @GetMapping("/activity/{id}")
     public String activityDetailForm(@PathVariable("id") Long id, Model model) throws JsonProcessingException
     {
-        ActivityDetailShowDto showDto = activityService.findById(id);
+        ActivityDetailShowDto showDto = activityService.getActivityDetailShowDto(id);
         model.addAttribute("activity", showDto);
         return "/activity/activityDetailForm";
     }
 
-
     @GetMapping("/activity/delete/{id}")
     public String activityDelete(@PathVariable("id") Long id) throws JsonProcessingException
     {
-        ActivityDetailShowDto activity = activityService.findById(id);
+        ActivityDetailShowDto activity = activityService.getActivityDetailShowDto(id);
         int year = activity.getStartTime().getYear();
         int month = activity.getStartTime().getMonthValue();
         activityService.delete(id);
         return "redirect:/" + year + "/" + month;
+    }
+
+    @GetMapping("/activity/edit/{id}")
+    public String activityEdit(@PathVariable("id") Long id, Model model) throws JsonProcessingException
+    {
+        ActivityDetailShowDto showDto= activityService.getActivityDetailShowDto(id);
+        model.addAttribute("activity", showDto);
+        return "/activity/activityEditForm";
     }
 }
