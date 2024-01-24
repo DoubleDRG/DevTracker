@@ -51,7 +51,7 @@
 </ul>
 <h2 class="code-line" data-line-start=32 data-line-end=33 ><a id="_32"></a>스크린샷</h2>
 <p class="has-line-data" data-line-start="33" data-line-end="34">메인화면</p>
-![홈 대표 화면](./assets/147648419/7b9a4c6b-691b-4ca3-bd45-0302a306b623)
+<img src="https://github.com/DoubleDRG/DevTracker/assets/assets/147648419/7b9a4c6b-691b-4ca3-bd45-0302a306b623" width="90%"></img>
 
 <p class="has-line-data" data-line-start="35" data-line-end="36">성장기록 화면</p>
 ![활동등록 대표화면](https://github.com/DoubleDRG/DevTracker/assets/147648419/32c41d99-8506-4f64-a11d-0771f4c5c212)
