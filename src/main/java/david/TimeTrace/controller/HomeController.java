@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import david.TimeTrace.domain.Activity;
 import david.TimeTrace.domain.dto.ActivityShowDto;
 import david.TimeTrace.service.activity.ActivityService;
+import david.TimeTrace.service.chart.ChartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class HomeController
 {
     private final ActivityService activityService;
+    private final ChartService chartService;
 
     @GetMapping({"/home/{year}/{month}","/{year}/{month}"})
     public String homeForm(@PathVariable("year") int year,
@@ -30,11 +32,15 @@ public class HomeController
         LocalDateTime targetMonth = LocalDateTime.of(year, month, 1, 0, 0, 0);
         LocalDateTime nextMonth = LocalDateTime.of(year, month, 1, 0, 0, 0).plusMonths(1);
 
+        List<Long[]> monthDurations = chartService.get3monthDurations(targetMonth);
+
         Map<LocalDate, List<ActivityShowDto>> monthActivities = activityService.findActivitiesByMonth(year, month);
 
         model.addAttribute("previousMonth", previousMonth);
         model.addAttribute("targetMonth", targetMonth);
         model.addAttribute("nextMonth", nextMonth);
+
+        model.addAttribute("monthDurations", monthDurations);
 
         model.addAttribute("monthActivities", monthActivities);
 

@@ -25,9 +25,9 @@ public class ChartServiceImplV1 implements ChartService
     // [8,1,2,3,5,1,...,8] => 1달전
     // [1,2,1,7,5,1,...,8] => 2달전
     @Override
-    public List<Duration[]> get3monthDurations(LocalDateTime targetDate)
+    public List<Long[]> get3monthDurations(LocalDateTime targetDate)
     {
-        List<Duration[]> durations = new ArrayList<Duration[]>();
+        List<Long[]> durations = new ArrayList<Long[]>();
 
         //이번달, 한달전, 두달전
         durations.add(getDurationList(targetDate));
@@ -39,26 +39,19 @@ public class ChartServiceImplV1 implements ChartService
 
     // 특정 달의 날짜별 duration 리스트를 반환
     // [0,0,0,7,5,1,..., 7] => 크기는 31고정
-    private Duration[] getDurationList(LocalDateTime targetDate)
+    private Long[] getDurationList(LocalDateTime targetDate)
     {
         List<Activity> list = activityRepository.findByMonth(targetDate.getYear(), targetDate.getMonthValue());
 
-        Duration[] durations = new Duration[31];
-        Arrays.fill(durations, Duration.ZERO);
+        Long[] durations = new Long[31];
+        Arrays.fill(durations, 0L);
 
         for (Activity activity : list)
         {
             int day = activity.getStartTime().getDayOfMonth();
-            durations[day - 1] = durations[day-1].plus(Duration.ofSeconds(activity.getDuration()));
+            durations[day - 1] = durations[day-1]+activity.getDuration()/3600;
         }
         return durations;
     }
-
-    @Override
-    public HashMap<LocalDateTime, List<ActivityTime>> getActivityTimes(LocalDateTime targetDate)
-    {
-        return null;
-    }
-
 }
 
