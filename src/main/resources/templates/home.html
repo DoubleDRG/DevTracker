@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -12,12 +12,12 @@
 <body>
 <div class="container text-center">
     <div class="row text-center mt-4 mb-4">
-        <div class="col mt-2">
-            <button class="btn btn-primary fw-bold"> <</button>
+        <div class="col mt-2" th:with="year=${#temporals.format(previousMonth,'yyyy')}, month=${#temporals.format(previousMonth,'MM')}">
+            <a class="btn btn-primary fw-bold" th:href="|/${year}/${month}|"> < </a>
         </div>
-        <div class="col"><h1>2024년 1월</h1></div>
-        <div class="col mt-2">
-            <button class="btn btn-primary fw-bold"> ></button>
+        <div class="col"><h1 th:text="${#temporals.format(targetMonth, 'yyyy년 MM월')}">2024년 1월</h1></div>
+        <div class="col mt-2" th:with="year=${#temporals.format(nextMonth,'yyyy')}, month=${#temporals.format(nextMonth,'MM')}">
+            <a class="btn btn-primary fw-bold" th:href="|/${year}/${month}|"> ></a>
         </div>
     </div>
     <div class="card" style="height: 20rem">

@@ -29,6 +29,7 @@ public class ActivityController
     {
         List<String> stacks = stackService.findSelectedStackNames();
         model.addAttribute("stacks", stacks);
+
         return "/activity/activityAddForm";
     }
 
