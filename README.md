@@ -50,18 +50,18 @@
 <li class="has-line-data" data-line-start="30" data-line-end="32"><a href="https://getbootstrap.com/">BootStrap</a> - 강력한 확장성 및 풍부한 기능을 바탕으로 HTML 템플릿을 더 아름답게 만들어줍니다.</li>
 </ul>
 <h2 class="code-line" data-line-start=32 data-line-end=33 ><a id="_32"></a>스크린샷</h2>
-<p class="has-line-data" data-line-start="33" data-line-end="34">메인화면</p>
+<h4 class="has-line-data" data-line-start="33" data-line-end="34">메인화면</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/545fa024-bc14-4668-8928-30573b555942" width="50%"></img>
 
-<p class="has-line-data" data-line-start="35" data-line-end="36">성장기록 화면</p>
-![활동등록 대표화면](https://github.com/DoubleDRG/DevTracker/assets/147648419/32c41d99-8506-4f64-a11d-0771f4c5c212)
+<h4 class="has-line-data" data-line-start="35" data-line-end="36">성장기록 화면</h4>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/32c41d99-8506-4f64-a11d-0771f4c5c212" width="50%"></img>
 
-<p class="has-line-data" data-line-start="37" data-line-end="38">내 기술 등록 화면</p>
-![내 스택 관리 페이지](https://github.com/DoubleDRG/DevTracker/assets/147648419/b66ab975-3e62-493c-a673-3c15ac98b1c3)
+<h4 class="has-line-data" data-line-start="37" data-line-end="38">내 기술 등록 화면</h4>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/b66ab975-3e62-493c-a673-3c15ac98b1c3" width="50%"></img>
 
 <h2 class="code-line" data-line-start=39 data-line-end=40 ><a id="_39"></a>시연영상</h2>
-<p class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</p>
+<h4 class="has-line-data" data-line-start="41" data-line-end="42">내 기술 등록 영상</h4>
 ![스택등록영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/48a00f61-b2da-4626-8f9c-8ebd5dbbeab7)
 
-<p class="has-line-data" data-line-start="43" data-line-end="44">성장기록 영상</p>
+<ph4 class="has-line-data" data-line-start="43" data-line-end="44">성장기록 영상</h4>
 ![기록 영상](https://github.com/DoubleDRG/DevTracker/assets/147648419/a0383bb5-06ea-40f6-a57e-fa7ec63566a0)
