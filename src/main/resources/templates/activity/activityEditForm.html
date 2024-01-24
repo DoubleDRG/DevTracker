@@ -28,7 +28,7 @@
         <br>
 
         <label class="fw-bold" for="stack">스택</label>
-        <select class = "form-select" th:name="stacks" id="stack" multiple>
+        <select class = "form-select" th:name="stacks" id="stack" multiple style="height: 13rem">
             <option th:each="selectedStack:${selectedStacks}" th:value="${selectedStack}" th:text="${selectedStack}" th:selected="${activity.stackNames.contains(selectedStack)}">Spring</option>
         </select>
 
@@ -69,5 +69,12 @@
         // 추가 설정: 테마, 플러그인, 툴바 옵션 등
     });
 </script>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

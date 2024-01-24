@@ -26,22 +26,22 @@
 
     <hr style="height: 2px; color: black; background-color: black;">
 
-    <form th:action="@{/stack}" action="./stackForm.html" method="post">
+    <form th:action="@{/stack}" th:with="year=${#temporals.format(now,'yyyy')}, month=${#temporals.format(now,'MM')}" action="./stackForm.html" method="post">
         <label class="fw-bold" for="addStack" th:text="|새로운 스택 등록|">새로운 스택 등록:</label>
 
-        <select class = "form-select" name="addStacks" id="addStack" multiple>
+        <select class = "form-select" name="addStacks" id="addStack" multiple style="height: 15rem">
             <option th:each="stack: ${notMyStack}" th:value="${stack}" th:text="${stack}">Spring</option>
         </select>
 
         <br>
 
         <label class="fw-bold" for="removeStack" th:text="|기존 스택 삭제|">기존 스택 삭제</label>
-        <select class = "form-select" name="removeStacks" id="removeStack" multiple>
+        <select class = "form-select" name="removeStacks" id="removeStack" multiple style="height: 13rem">
             <option th:each="stack:${myStack}" th:value="${stack}" th:text="${stack}">Spring</option>
         </select>
         <br>
         <button class="btn btn-primary" type="submit">저장하기</button>
-        <button class="btn btn-secondary" th:onclick="|location.href='@{...}'|">돌아가기</button>
+        <a class="btn btn-secondary" th:href="|/${year}/${month}|">돌아가기</a>
     </form>
 
 </div>
@@ -52,5 +52,13 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 </body>
 </html>

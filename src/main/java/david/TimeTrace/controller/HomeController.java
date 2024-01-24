@@ -23,11 +23,21 @@ public class HomeController
     private final ActivityService activityService;
     private final ChartService chartService;
 
+    @GetMapping("/")
+    public String redirectHome()
+    {
+        LocalDateTime now = LocalDateTime.now();
+        int year = now.getYear();
+        int month = now.getMonthValue();
+        return "redirect:/" + year + "/" + month;
+    }
+
     @GetMapping({"/home/{year}/{month}","/{year}/{month}"})
     public String homeForm(@PathVariable("year") int year,
                            @PathVariable("month") int month,
                            Model model) throws JsonProcessingException
     {
+        LocalDateTime lastLastMonth = LocalDateTime.of(year, month, 1, 0, 0, 0).minusMonths(2);
         LocalDateTime previousMonth = LocalDateTime.of(year, month, 1, 0, 0, 0).minusMonths(1);
         LocalDateTime targetMonth = LocalDateTime.of(year, month, 1, 0, 0, 0);
         LocalDateTime nextMonth = LocalDateTime.of(year, month, 1, 0, 0, 0).plusMonths(1);
@@ -36,6 +46,7 @@ public class HomeController
 
         Map<LocalDate, List<ActivityShowDto>> monthActivities = activityService.findActivitiesByMonth(year, month);
 
+        model.addAttribute("lastLastMonth", lastLastMonth);
         model.addAttribute("previousMonth", previousMonth);
         model.addAttribute("targetMonth", targetMonth);
         model.addAttribute("nextMonth", nextMonth);
