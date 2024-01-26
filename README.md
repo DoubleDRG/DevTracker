@@ -68,4 +68,4 @@
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/40e7cbdb-fa52-4d64-9519-f7d9df651bb1"></img>
 
 <h2 class="code-line" data-line-start=16 data-line-end=17 ><a id="__16"></a>릴리즈 노트</h2>
-
+<li> 2024-1-26: 기본 뼈대 프로토타입 완성</li>
