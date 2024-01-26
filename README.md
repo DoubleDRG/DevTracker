@@ -67,5 +67,5 @@
 <h4>스택 관리 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/40e7cbdb-fa52-4d64-9519-f7d9df651bb1"></img>
 
-  
+<h2 class="code-line" data-line-start=16 data-line-end=17 ><a id="__16"></a>릴리즈 노트</h2>
 
