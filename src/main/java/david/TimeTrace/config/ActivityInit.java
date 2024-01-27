@@ -20,7 +20,7 @@ public class ActivityInit
 {
     private final ActivityService activityService;
 
-    @PostConstruct
+//    @PostConstruct
     void init() throws JsonProcessingException
     {
         LocalDateTime start = LocalDateTime.of(2023, 11, 1, 0, 0, 0);
