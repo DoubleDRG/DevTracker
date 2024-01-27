@@ -51,13 +51,13 @@
 </ul>
 <h2 class="code-line" data-line-start=32 data-line-end=33 ><a id="_32"></a>스크린샷</h2>
 <h4 class="has-line-data" data-line-start="33" data-line-end="34">메인화면</h4>
-<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/545fa024-bc14-4668-8928-30573b555942" width="50%"></img>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/545fa024-bc14-4668-8928-30573b555942" width="100%"></img>
 
 <h4 class="has-line-data" data-line-start="35" data-line-end="36">기록 화면</h4>
-<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/32c41d99-8506-4f64-a11d-0771f4c5c212" width="50%"></img>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/32c41d99-8506-4f64-a11d-0771f4c5c212" width="100%"></img>
 
 <h4 class="has-line-data" data-line-start="37" data-line-end="38">내 기술 등록 화면</h4>
-<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/b66ab975-3e62-493c-a673-3c15ac98b1c3" width="50%"></img>
+<img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/b66ab975-3e62-493c-a673-3c15ac98b1c3" width="100%"></img>
 
 <h2 class="code-line" data-line-start=39 data-line-end=40 ><a id="_39"></a>시연영상</h2>
 
@@ -67,5 +67,5 @@
 <h4>스택 관리 영상</h4>
 <img src="https://github.com/DoubleDRG/DevTracker/assets/147648419/40e7cbdb-fa52-4d64-9519-f7d9df651bb1"></img>
 
-  
-
+<h2 class="code-line" data-line-start=16 data-line-end=17 ><a id="__16"></a>릴리즈 노트</h2>
+<li> 2024-1-26: 기본 뼈대 프로토타입 완성</li>
