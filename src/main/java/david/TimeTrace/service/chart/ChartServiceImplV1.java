@@ -1,13 +1,11 @@
 package david.TimeTrace.service.chart;
 
 import david.TimeTrace.domain.Activity;
-import david.TimeTrace.domain.ActivityTime;
 import david.TimeTrace.repository.activity.ActivityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 

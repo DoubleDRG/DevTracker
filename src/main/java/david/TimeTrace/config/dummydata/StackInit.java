@@ -1,4 +1,4 @@
-package david.TimeTrace.config;
+package david.TimeTrace.config.dummydata;
 
 import david.TimeTrace.domain.Stack;
 import david.TimeTrace.service.stack.StackService;

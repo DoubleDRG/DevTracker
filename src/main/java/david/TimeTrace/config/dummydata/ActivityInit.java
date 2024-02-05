@@ -1,4 +1,4 @@
-package david.TimeTrace.config;
+package david.TimeTrace.config.dummydata;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import david.TimeTrace.domain.Stack;
