@@ -1,10 +1,8 @@
 package david.TimeTrace.config.dummydata;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import david.TimeTrace.domain.Stack;
 import david.TimeTrace.domain.dto.ActivitySaveDto;
 import david.TimeTrace.service.activity.ActivityService;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
