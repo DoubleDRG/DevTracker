@@ -30,8 +30,8 @@ public class MySqlActivityRepository implements ActivityRepository
     public List<Activity> findByMonth(int year, int month)
     {
         String query =
-                "select a from Activity a where YEAR(a.startTime) =:year " +
-                "and MONTH(a.startTime) =: month order by a.startTime desc";
+                "select a from Activity a where YEAR(a.timeInfo.startTime) =:year " +
+                "and MONTH(a.timeInfo.startTime) =: month order by a.timeInfo.startTime desc";
         return entityManager.createQuery(query, Activity.class)
                 .setParameter("year", year)
                 .setParameter("month", month)
@@ -42,9 +42,9 @@ public class MySqlActivityRepository implements ActivityRepository
     public List<Activity> findByDay(int year, int month, int day)
     {
         String query =
-                "select a from Activity a where YEAR(a.startTime) =:year " +
-                "and MONTH(a.startTime) =:month " +
-                "and DAY(a.startTime) =:day";
+                "select a from Activity a where YEAR(a.timeInfo.startTime) =:year " +
+                "and MONTH(a.timeInfo.startTime) =:month " +
+                "and DAY(a.timeInfo.startTime) =:day";
         return entityManager.createQuery(query, Activity.class)
                 .setParameter("year", year)
                 .setParameter("month", month)

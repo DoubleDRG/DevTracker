@@ -1,17 +1,19 @@
 package david.TimeTrace.domain;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import static lombok.AccessLevel.*;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor(access = PROTECTED)
 public class Stack
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stack_id")
     private Long id;
 
     private String name;
@@ -19,10 +21,6 @@ public class Stack
     @Column(length = 1000)
     private String imageUrl;
     private Boolean selected;
-
-    protected Stack()
-    {
-    }
 
     @Builder
     public Stack(String name, String imageUrl, Boolean selected)

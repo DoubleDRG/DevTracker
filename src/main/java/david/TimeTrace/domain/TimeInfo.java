@@ -1,13 +1,18 @@
 package david.TimeTrace.domain;
 
-import lombok.Builder;
-import lombok.Data;
+import jakarta.persistence.Embeddable;
+import lombok.*;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-@Data
-public class ActivityTime
+import static lombok.AccessLevel.*;
+
+@Getter
+@Setter
+@NoArgsConstructor(access = PROTECTED)
+@Embeddable
+public class TimeInfo
 {
     private LocalDateTime createDate;
     private LocalDateTime startTime;
@@ -15,7 +20,7 @@ public class ActivityTime
     private Duration duration;
 
     @Builder
-    public ActivityTime(LocalDateTime createDate, LocalDateTime startTime, LocalDateTime endTime, Duration duration)
+    public TimeInfo(LocalDateTime createDate, LocalDateTime startTime, LocalDateTime endTime, Duration duration)
     {
         this.createDate = createDate;
         this.startTime = startTime;

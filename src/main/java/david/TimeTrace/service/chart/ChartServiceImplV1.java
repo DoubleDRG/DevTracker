@@ -46,8 +46,8 @@ public class ChartServiceImplV1 implements ChartService
 
         for (Activity activity : list)
         {
-            int day = activity.getStartTime().getDayOfMonth();
-            durations[day - 1] = durations[day-1]+activity.getDuration()/3600;
+            int day = activity.getTimeInfo().getStartTime().getDayOfMonth();
+            durations[day - 1] = durations[day-1]+activity.getTimeInfo().getDuration().toSeconds()/3600;
         }
         return durations;
     }

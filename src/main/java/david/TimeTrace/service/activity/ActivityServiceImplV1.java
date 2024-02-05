@@ -101,8 +101,8 @@ public class ActivityServiceImplV1 implements ActivityService
                 .title(activity.getTitle())
                 .stackNames(transferStackNameJsonToStackNameList(activity.getStacks()))
                 .stackImages(transferStackUrlJsonToStackUrlList(activity.getStacks()))
-                .startTime(activity.getStartTime())
-                .endTime(activity.getEndTime())
+                .startTime(activity.getTimeInfo().getStartTime())
+                .endTime(activity.getTimeInfo().getEndTime())
                 .content(activity.getContent())
                 .build();
     }
@@ -116,9 +116,9 @@ public class ActivityServiceImplV1 implements ActivityService
 
         activity.setTitle(updateDto.getTitle());
         activity.setStacks(stackJson);
-        activity.setStartTime(updateDto.getStartTime());
-        activity.setEndTime(updateDto.getEndTime());
-        activity.setDuration(durationSeconds);
+        activity.getTimeInfo().setStartTime(updateDto.getStartTime());
+        activity.getTimeInfo().setEndTime(updateDto.getEndTime());
+        activity.getTimeInfo().setDuration(Duration.ofSeconds(durationSeconds));
         activity.setContent(updateDto.getContent());
         return activity;
     }
@@ -138,7 +138,7 @@ public class ActivityServiceImplV1 implements ActivityService
         // {날짜2: [activity1, activity2, activity3, ...]}
         for (Activity activity : activities)
         {
-            LocalDate date = activity.getStartTime().toLocalDate();
+            LocalDate date = activity.getTimeInfo().getStartTime().toLocalDate();
 
             List<String> stackNames = transferStackNameJsonToStackNameList(activity.getStacks());
             List<String> stackUrls = transferStackUrlJsonToStackUrlList(activity.getStacks());

@@ -26,9 +26,8 @@ public class Activity
     @Column(length=20000)
     private String stacks;
 
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
-    private Long duration;
+    @Embedded
+    private TimeInfo timeInfo;
 
     @Column(length = 20000)
     private String content;
@@ -38,9 +37,14 @@ public class Activity
     {
         this.title = title;
         this.stacks = stacks;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.duration = duration;
+
+        TimeInfo timeInfo = TimeInfo.builder()
+                .startTime(startTime)
+                .endTime(endTime)
+                .duration(Duration.ofSeconds(duration))
+                .build();
+
+        this.timeInfo = timeInfo;
         this.content = content;
     }
 }
